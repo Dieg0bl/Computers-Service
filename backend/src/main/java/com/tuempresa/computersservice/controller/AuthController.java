@@ -17,6 +17,7 @@ import com.tuempresa.computersservice.service.UserService;
 
 @RestController
 @RequestMapping("/api/auth")
+// Controlador para autenticación y registro de usuarios
 public class AuthController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
@@ -27,7 +28,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> loginData) {
+    public ResponseEntity<String> login(@RequestBody Map<String, String> loginData) {
+        // Autentica al usuario con email y contraseña
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginData.get("email"),
@@ -38,9 +40,8 @@ public class AuthController {
         return ResponseEntity.ok().body("Login correcto");
     }
 
-    // Endpoint de registro solo para admin (puede crear empleados)
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
+    public ResponseEntity<String> register(@RequestBody User user) {
         if (userService.existsByEmail(user.getEmail())) {
             return ResponseEntity.badRequest().body("El email ya está registrado");
         }
