@@ -11,9 +11,17 @@ export function AuthProvider({ children }) {
     setLoading(true);
     // Aquí irá la llamada real a la API
     setTimeout(() => {
-      setUser({ email, role: email === "admin@demo.com" ? "ADMIN_USER" : "BASIC_USER" });
+      setUser({ email, role: email === "admin@demo.com" ? "ADMIN_USER" : "BASIC_USER", nombre: email.split('@')[0], password });
       setLoading(false);
     }, 800);
+  };
+
+  const editProfile = (newData) => {
+    setUser((prev) => ({ ...prev, ...newData }));
+  };
+
+  const changePassword = (newPassword) => {
+    setUser((prev) => ({ ...prev, password: newPassword }));
   };
 
   const logout = () => {
@@ -21,7 +29,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, loading, editProfile, changePassword }}>
       {children}
     </AuthContext.Provider>
   );
