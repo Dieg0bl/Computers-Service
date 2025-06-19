@@ -18,7 +18,7 @@ public class Reparacion {
     private String descripcion;
 
     @Column(nullable = false)
-    private String estado; // pendiente, en_proceso, finalizada
+    private String estado;
 
     @Column(nullable = false)
     private LocalDate fechaSolicitud;

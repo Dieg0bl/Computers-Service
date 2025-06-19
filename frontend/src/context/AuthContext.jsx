@@ -3,29 +3,45 @@ import { createContext, useContext, useState } from "react";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
   const [loading, setLoading] = useState(false);
 
-  // Simulación de login/logout para desarrollo
-  const login = async (email, password) => {
+  const login = async (username, password) => {
     setLoading(true);
-    // Aquí irá la llamada real a la API
-    setTimeout(() => {
-      setUser({ email, role: email === "admin@demo.com" ? "ADMIN_USER" : "BASIC_USER", nombre: email.split('@')[0], password });
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      if (!response.ok) throw new Error("Credenciales inválidas");
+      const data = await response.json();
+      setUser(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", data.token);
+      return data.user;
+    } finally {
       setLoading(false);
-    }, 800);
+    }
   };
 
-  const editProfile = (newData) => {
+  const editProfile = async (newData) => {
+    // TODO: Implementar llamada real a la API para editar perfil
     setUser((prev) => ({ ...prev, ...newData }));
   };
 
-  const changePassword = (newPassword) => {
+  const changePassword = async (newPassword) => {
+    // TODO: Implementar llamada real a la API para cambiar contraseña
     setUser((prev) => ({ ...prev, password: newPassword }));
   };
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
   return (

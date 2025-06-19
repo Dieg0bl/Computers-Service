@@ -10,7 +10,7 @@ public class Equipo {
     private Long id;
 
     @Column(nullable = false)
-    private String tipo; // Desktop, Laptop, Server
+    private String tipo;
 
     @Column(nullable = false)
     private String marca;

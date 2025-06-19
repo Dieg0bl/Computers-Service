@@ -15,11 +15,19 @@ export default function Registro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // Aquí iría la llamada real a la API
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) throw new Error("Error al registrar usuario");
       setToast({ message: "Usuario registrado correctamente", type: "success" });
+    } catch (err) {
+      setToast({ message: err.message || "Error inesperado", type: "error" });
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (

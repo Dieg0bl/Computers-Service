@@ -29,8 +29,8 @@ public class PasswordController {
             return ResponseEntity.badRequest().body("No existe un usuario con ese email");
         }
         String token = UUID.randomUUID().toString();
-        // Aquí deberías guardar el token en la base de datos asociado al usuario (simplificado)
-        // En producción, crea una entidad PasswordResetToken
+        // TODO: Guardar el token en la base de datos asociado al usuario
+        // TODO: Crear una entidad PasswordResetToken para producción
         String resetLink = "http://localhost:5173/reset-password?token=" + token;
         emailService.sendEmail(email, "Recuperación de contraseña", "Haz clic aquí para restablecer tu contraseña: " + resetLink);
         return ResponseEntity.ok("Se ha enviado un email de recuperación");

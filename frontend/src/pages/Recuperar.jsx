@@ -10,11 +10,19 @@ export default function Recuperar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // Aquí iría la llamada real a la API
-    setTimeout(() => {
-      setToast({ message: "Si el email existe, se ha enviado un enlace de recuperación", type: "success" });
+    try {
+      const response = await fetch("/api/auth/recuperar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!response.ok) throw new Error("Error al enviar correo de recuperación");
+      setToast({ message: "Correo de recuperación enviado", type: "success" });
+    } catch (err) {
+      setToast({ message: err.message || "Error inesperado", type: "error" });
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Login from "./pages/Login";
 import Recuperar from "./pages/Recuperar";
@@ -11,6 +11,7 @@ import UsuariosCRUD from "./pages/usuarios/UsuariosCRUD";
 import EquiposCRUD from "./pages/equipos/EquiposCRUD";
 import ReparacionesCRUD from "./pages/reparaciones/ReparacionesCRUD";
 import LegalNotice from "./components/Legal/LegalNotice";
+import Informes from "./pages/Informes";
 
 function PrivateRoute({ children, roles }) {
   const { user } = useAuth();
@@ -22,6 +23,7 @@ function PrivateRoute({ children, roles }) {
 function AppRoutes() {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/recuperar" element={<Recuperar />} />
       <Route path="/registro" element={<Registro />} />
@@ -31,6 +33,7 @@ function AppRoutes() {
       <Route path="/usuarios" element={<PrivateRoute roles={["ADMIN_USER"]}><UsuariosCRUD /></PrivateRoute>} />
       <Route path="/equipos" element={<PrivateRoute roles={["ADMIN_USER"]}><EquiposCRUD /></PrivateRoute>} />
       <Route path="/reparaciones" element={<PrivateRoute roles={["ADMIN_USER"]}><ReparacionesCRUD /></PrivateRoute>} />
+      <Route path="/informes" element={<PrivateRoute roles={["ADMIN_USER"]}><Informes /></PrivateRoute>} />
       <Route path="/legal" element={<LegalNotice />} />
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
@@ -44,6 +47,10 @@ function App() {
         <div className="p-4">
           <h1 className="text-2xl font-bold">Computers Service</h1>
           <p>¡Bienvenido a tu app React + Vite!</p>
+          <nav className="mb-4">
+            <Link to="/legal" className="text-blue-500 hover:underline text-sm">Aviso legal</Link>
+            <Link to="/informes" className="ml-4 text-blue-500 hover:underline text-sm">Informes</Link>
+          </nav>
           <AppRoutes />
         </div>
       </BrowserRouter>

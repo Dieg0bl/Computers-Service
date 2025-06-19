@@ -17,13 +17,13 @@ public class Informe {
     private Long id;
 
     @Column(nullable = false)
-    private String tipo; // Ej: "equipos", "reparaciones"
+    private String tipo;
 
     @Column(nullable = false)
     private LocalDateTime fechaGeneracion;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String contenido; // Puede ser HTML, texto o base64 de PDF
+    private String contenido;
 
     public Informe() {}
 

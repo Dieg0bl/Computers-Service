@@ -17,7 +17,6 @@ import com.tuempresa.computersservice.service.UserService;
 
 @RestController
 @RequestMapping("/api/auth")
-// Controlador para autenticación y registro de usuarios
 public class AuthController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
@@ -29,7 +28,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Map<String, String> loginData) {
-        // Autentica al usuario con email y contraseña
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginData.get("email"),

@@ -1,15 +1,117 @@
-# Backend
-/target/
-*.iml
+# ========================================================
+# 📦 DEPENDENCIAS
+# ========================================================
+
+# Maven (Java)
+target/
 *.class
-*.log
 *.jar
+*.war
 
-# Frontend
-/node_modules/
-/dist/
+# Node.js
+node_modules/
+yarn.lock
+pnpm-lock.yaml
+package-lock.json
+
+# Vite
+dist/
+.vite/
+/build/
+
+# ========================================================
+# 🔐 CONFIGURACIÓN SENSIBLE
+# ========================================================
 .env
+.env.*
+!.env.example  # Permite dejar un ejemplo de variables
 
-# General
+# ========================================================
+# 🔨 OUTPUTS Y REPORTES
+# ========================================================
+# Maven
+target/surefire-reports/
+target/failsafe-reports/
+target/maven-status/
+
+# Cobertura
+coverage/
+reports/
+jacoco.exec
+
+# ========================================================
+# 🧪 PRUEBAS
+# ========================================================
+*.test.*
+*.spec.*
+
+# ========================================================
+# 💻 ARCHIVOS DE SISTEMA
+# ========================================================
 .DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# ========================================================
+# 🔄 ARCHIVOS TEMPORALES / DE BACKUP
+# ========================================================
+*.log
+*.bak
+*.tmp
+*.swp
+*.swo
+*.orig
+*.rej
+*~
+# Archivos de bloqueo y conflictos de Git
+*.lock
+*.merge
+*.patch
+
+# ========================================================
+# 🧠 IDEs y EDITORES
+# ========================================================
+
+# VSCode
+.vscode/
+.vscode/*.code-workspace
+
+# JetBrains (IntelliJ, WebStorm, etc.)
 .idea/
+*.iml
+*.iws
+*.ipr
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+.nb-gradle/
+
+# Eclipse
+.project
+.classpath
+.csettings
+.settings/
+
+# Otros editores
+*.sublime-workspace
+*.sublime-project
+
+# ========================================================
+# 🐳 DOCKER (si usas contenedores)
+# ========================================================
+docker-compose.override.yml
+.docker/
+*.pid
+*.sock
+
+# ========================================================
+# ✅ OTROS (según prácticas recomendadas)
+# ========================================================
+npm-debug.log*
+yarn-error.log*
+tsconfig.tsbuildinfo
