@@ -1,15 +1,12 @@
-# Computers Service Monorepo
+# Computers Service
 
-## Estructura
-- `backend/`: Java + Spring Boot
-- `frontend/`: React + Vite
+App de tickets/mantenimiento con Spring Boot API + Vite frontend.
 
-## Requisitos previos
-- Java 17+
-- Node.js 18+
-- Docker (opcional, para entorno completo)
+## Requisitos
+- **JDK 17+**
+- **Node.js 20+**
 
-## Cómo correr el proyecto
+## Ejecutar en ≤5 min
 
 ### Backend
 ```bash
@@ -17,33 +14,14 @@ cd backend
 mvn spring-boot:run
 ```
 
-### Frontend
+### Frontend  
 ```bash
 cd frontend
-npm install
-npm run dev
+npm ci && npm run dev
 ```
 
-### Docker (app + db)
-```bash
-docker-compose up --build
-```
+## API Documentation
+- **Swagger UI**: http://localhost:8080/swagger-ui/index.html
 
-### Ejecutar tests
-- Backend: `cd backend && mvn test`
-- Frontend: `cd frontend && npm run test`
-
-## Checklist de producción
-- [x] Código ordenado y limpio (MVC, DRY, SOLID donde aplica)
-- [x] .gitignore bien configurado
-- [x] Linter y formatter (Prettier recomendado)
-- [x] Tests unitarios básicos en backend y frontend
-- [x] Seguridad básica (Spring Security, sin datos sensibles en repo)
-- [x] Aviso legal accesible
-- [x] Docker Compose funcional
-- [x] README claro y actualizado
-
-## Notas
-- No subas contraseñas ni datos sensibles.
-- Revisa el código antes de hacer commit.
-- Usa ramas y PRs si trabajas en equipo.
+## Estado
+**En desarrollo** - versión 0.1.0
